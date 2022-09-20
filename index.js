@@ -32,12 +32,19 @@ const images = [
   "test/tags-test-2",
   "test/tags-test-3",
   "test/tags-test-4",
+  "test/tags-test-5",
+  "test/tags-test-6",
+  "test/tags-test-7",
+  "test/tags-test-8",
+  "test/tags-test-9",
+  "test/tags-test-10",
+  "test/tags-test-11",
 ];
 
-const spliceCount = Math.ceil(prodTags.length / (images.length + 8));
+const spliceCount = Math.ceil(prodTags.length / images.length);
+console.log(spliceCount);
 for (let i = 0; i < images.length; i++) {
-  console.log("updating tags for", images[i]);
-  await cloud.api.update(images[i], {
-    tags: prodTags.splice(0, spliceCount),
-  });
+  const tags = prodTags.splice(0, spliceCount);
+  console.log("updating tags for", images[i], tags.length);
+  await cloud.api.update(images[i], { tags });
 }
